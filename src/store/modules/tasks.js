@@ -28,15 +28,15 @@ export default {
       commit("setTasks", response.data.data);
     },
     async addTask({ commit }, task) {
-      const response = await axios.post("/tasks", task);
+      const response = await axios.post("/admin/tasks", task);
       commit("addTask", response.data);
     },
     async updateTask({ commit }, task) {
-      const response = await axios.put(`/tasks/${task.id}`, task);
+      const response = await axios.put(`/admin/tasks/${task.id}`, task);
       commit("updateTask", response.data);
     },
     async deleteTask({ commit }, taskId) {
-      await axios.delete(`/tasks/${taskId}`);
+      await axios.delete(`/admin/tasks/${taskId}`);
       commit("deleteTask", taskId);
     },
   },

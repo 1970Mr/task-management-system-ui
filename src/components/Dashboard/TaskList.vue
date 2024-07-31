@@ -2,7 +2,7 @@
   <div>
     <button @click="openModal" class="btn btn-primary mb-4">Add Task</button>
     <div v-if="tasks.length === 0">No tasks available.</div>
-    <div v-else>
+    <div v-else class="px-[10rem]">
       <TaskItem
         v-for="task in tasks"
         :key="task.id"

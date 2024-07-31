@@ -2,7 +2,7 @@
   <Modal @close="$emit('close')">
     <template #header>
       <h3 class="text-lg font-medium leading-6 text-gray-900">
-        {{ task.id ? "Edit Task" : "Add Task" }}
+        {{ task?.id ? "Edit Task" : "Add Task" }}
       </h3>
     </template>
     <template #body>
@@ -16,8 +16,24 @@
         <textarea
           v-model="taskData.description"
           placeholder="Description"
-          class="input"
+          class="input mb-2"
         ></textarea>
+        <select v-model="taskData.status" class="input mb-2">
+          <option value="active">Active</option>
+          <option value="completed">Completed</option>
+          <option value="inactive">Inactive</option>
+        </select>
+        <select v-model="taskData.priority" class="input mb-2">
+          <option value="low">Low</option>
+          <option value="medium">Medium</option>
+          <option value="high">High</option>
+        </select>
+        <input
+          v-model="taskData.deadline"
+          type="datetime-local"
+          placeholder="Deadline"
+          class="input mb-2"
+        />
       </div>
     </template>
     <template #footer>
@@ -38,19 +54,34 @@ export default {
   props: {
     task: {
       type: Object,
-      default: () => ({ title: "", description: "" }),
+      default: () => ({
+        title: "",
+        description: "",
+        status: "active",
+        priority: "medium",
+        deadline: "",
+      }),
     },
   },
-  setup(props) {
+  setup(props, { emit }) {
     const taskData = ref({ ...props.task });
 
-    watch(props, (newProps) => {
-      taskData.value = { ...newProps.task };
-    });
+    watch(
+      () => props.task,
+      (newTask) => {
+        taskData.value = { ...newTask };
+      }
+    );
 
     const save = () => {
-      if (taskData.value.title && taskData.value.description) {
-        this.$emit("save", taskData.value);
+      if (
+        taskData.value.title &&
+        taskData.value.description &&
+        taskData.value.status &&
+        taskData.value.priority &&
+        taskData.value.deadline
+      ) {
+        emit("save", taskData.value);
       }
     };
 
