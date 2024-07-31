@@ -20,6 +20,9 @@
           />
         </div>
         <button type="submit" class="btn btn-primary w-full">Login</button>
+        <router-link to="/register" class="text-blue-500 hover:underline">
+          Don't have an account? Register here
+        </router-link>
       </form>
     </div>
   </div>
@@ -48,13 +51,3 @@ export default {
   },
 };
 </script>
-
-<style>
-.input {
-  @apply w-full px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-600;
-}
-
-.btn-primary {
-  @apply bg-blue-600 text-white py-2 px-4 rounded-lg shadow-lg hover:bg-blue-700;
-}
-</style>
