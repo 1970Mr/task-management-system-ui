@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../../services/axios";
 
 export default {
   namespaced: true,
@@ -9,6 +9,10 @@ export default {
   mutations: {
     setUser(state, user) {
       state.user = user;
+    },
+    setUserRole(state, user) {
+      state.userRole = user.role;
+      localStorage.setItem("userRole", user.role);
     },
     setToken(state, token) {
       state.token = token;
@@ -21,18 +25,32 @@ export default {
     },
   },
   actions: {
-    async login({ commit }, credentials) {
-      const response = await axios.post("/api/login", credentials);
-      commit("setToken", response.data.token);
-      commit("setUser", response.data.user);
+    async login({ commit, dispatch }, credentials) {
+      const response = await axios.post("/login", credentials);
+      commit("setToken", response.data.access_token);
+      await dispatch("getUser"); // Fetch user data after login
     },
-    async register({ commit }, credentials) {
-      const response = await axios.post("/api/register", credentials);
-      commit("setToken", response.data.token);
-      commit("setUser", response.data.user);
+    async register({ commit, dispatch }, credentials) {
+      const response = await axios.post("/register", credentials);
+      commit("setToken", response.data.access_token);
+      await dispatch("getUser"); // Fetch user data after registration
     },
     logout({ commit }) {
       commit("logout");
+    },
+    async getUser({ commit, state }) {
+      const response = await axios.get("/user", {
+        headers: {
+          Authorization: `Bearer ${state.token}`,
+        },
+      });
+      commit("setUser", response.data);
+      commit("setUserRole", response.data);
+    },
+    async checkUser({ state, dispatch }) {
+      if (!state.user) {
+        await dispatch("getUser");
+      }
     },
   },
 };

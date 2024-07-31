@@ -20,7 +20,10 @@
           />
         </div>
         <button type="submit" class="btn btn-primary w-full">Register</button>
-        <router-link to="/login" class="text-blue-500 hover:underline">
+        <router-link
+          :to="{ name: 'login' }"
+          class="text-blue-500 hover:underline mt-3"
+        >
           Already have an account? Login here
         </router-link>
       </form>

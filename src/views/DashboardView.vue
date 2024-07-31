@@ -1,19 +1,22 @@
 <template>
-  <div>
-    <Header />
-    <div class="container mx-auto py-6">
+  <div class="flex flex-col min-h-screen">
+    <AppHeader />
+    <main class="flex-grow container mx-auto py-6">
       <TaskList />
-    </div>
+    </main>
+    <AppFooter />
   </div>
 </template>
 
 <script>
-import Header from "@/components/Layout/AppHeader.vue";
 import TaskList from "@/components/Dashboard/TaskList.vue";
+import AppHeader from "@/components/Layout/AppHeader.vue";
+import AppFooter from "@/components/Layout/AppFooter.vue";
 
 export default {
   components: {
-    Header,
+    AppFooter,
+    AppHeader,
     TaskList,
   },
 };

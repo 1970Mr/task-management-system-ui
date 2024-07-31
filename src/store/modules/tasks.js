@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../../services/axios";
 
 export default {
   namespaced: true,
@@ -24,19 +24,19 @@ export default {
   },
   actions: {
     async fetchTasks({ commit }) {
-      const response = await axios.get("/api/tasks");
+      const response = await axios.get("/tasks");
       commit("setTasks", response.data);
     },
     async addTask({ commit }, task) {
-      const response = await axios.post("/api/tasks", task);
+      const response = await axios.post("/tasks", task);
       commit("addTask", response.data);
     },
     async updateTask({ commit }, task) {
-      const response = await axios.put(`/api/tasks/${task.id}`, task);
+      const response = await axios.put(`/tasks/${task.id}`, task);
       commit("updateTask", response.data);
     },
     async deleteTask({ commit }, taskId) {
-      await axios.delete(`/api/tasks/${taskId}`);
+      await axios.delete(`/tasks/${taskId}`);
       commit("deleteTask", taskId);
     },
   },

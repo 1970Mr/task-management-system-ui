@@ -1,7 +1,7 @@
 <template>
   <div class="flex items-center justify-center h-screen bg-gray-100">
     <div class="w-full max-w-md">
-      <form @submit.prevent="login">
+      <form @submit.prevent="loginHandler">
         <h2 class="text-2xl font-bold mb-6 text-center">Login</h2>
         <div class="mb-4">
           <input
@@ -20,7 +20,10 @@
           />
         </div>
         <button type="submit" class="btn btn-primary w-full">Login</button>
-        <router-link to="/register" class="text-blue-500 hover:underline">
+        <router-link
+          :to="{ name: 'register' }"
+          class="text-blue-500 hover:underline mt-3"
+        >
           Don't have an account? Register here
         </router-link>
       </form>
@@ -40,7 +43,7 @@ export default {
   },
   methods: {
     ...mapActions("auth", ["login"]),
-    async login() {
+    async loginHandler() {
       try {
         await this.login({ email: this.email, password: this.password });
         this.$router.push("/dashboard");

@@ -4,17 +4,18 @@
       <ul>
         <li class="mb-4">
           <router-link
-            to="/dashboard"
+            :to="{ name: 'dashboard' }"
             class="block py-2 px-4 rounded hover:bg-gray-700"
             >Dashboard</router-link
           >
         </li>
         <li v-if="isAdmin" class="mb-4">
           <router-link
-            to="/admin-tasks"
+            :to="{ name: 'adminTasks' }"
             class="block py-2 px-4 rounded hover:bg-gray-700"
-            >Admin Tasks</router-link
           >
+            Admin Tasks
+          </router-link>
         </li>
       </ul>
     </nav>
