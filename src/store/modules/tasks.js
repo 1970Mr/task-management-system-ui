@@ -25,7 +25,7 @@ export default {
   actions: {
     async fetchTasks({ commit }) {
       const response = await axios.get("/tasks");
-      commit("setTasks", response.data);
+      commit("setTasks", response.data.data);
     },
     async addTask({ commit }, task) {
       const response = await axios.post("/tasks", task);
