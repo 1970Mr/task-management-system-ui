@@ -27,13 +27,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.btn-secondary {
-  @apply bg-gray-600 text-white py-1 px-2 rounded-lg hover:bg-gray-700;
-}
-
-.btn-danger {
-  @apply bg-red-600 text-white py-1 px-2 rounded-lg hover:bg-red-700;
-}
-</style>
