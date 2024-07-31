@@ -2,21 +2,22 @@
   <div
     :class="taskClass"
     class="bg-white p-4 rounded-lg shadow mb-4 flex justify-between items-center"
+    @click="$emit('view', task)"
   >
-    <div :class="{ 'line-through': task.status === 'completed' }">
+    <div class="cursor-pointer">
       <div class="text-lg font-semibold">{{ task.title }}</div>
       <div class="text-sm text-gray-600">{{ task.description }}</div>
     </div>
     <div class="flex space-x-2">
       <button
-        @click="$emit('edit', task)"
+        @click.stop="$emit('edit', task)"
         class="btn btn-secondary"
         v-if="isAdmin"
       >
         Edit
       </button>
       <button
-        @click="$emit('delete', task.id)"
+        @click.stop="$emit('delete', task.id)"
         class="btn btn-danger"
         v-if="isAdmin"
       >

@@ -3,10 +3,19 @@
     <div class="container mx-auto flex justify-between items-center">
       <h1 class="text-xl font-bold">Task Management</h1>
       <nav>
-        <router-link :to="{ name: 'dashboard' }" class="mr-4">
+        <router-link
+          :to="{ name: 'dashboard' }"
+          class="mr-4"
+          active-class="active-link"
+        >
           Dashboard
         </router-link>
-        <router-link :to="{ name: 'adminTasks' }" class="mr-4" v-if="isAdmin">
+        <router-link
+          :to="{ name: 'adminTasks' }"
+          class="mr-4"
+          active-class="active-link"
+          v-if="isAdmin"
+        >
           Admin
         </router-link>
         <button @click="logoutHandler" class="btn btn-secondary">Logout</button>

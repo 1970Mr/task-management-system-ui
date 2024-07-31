@@ -35,14 +35,7 @@
           class="input mb-2"
         />
         <select v-model="taskData.user_ids" multiple class="input mb-2">
-          <option
-            v-for="user in users"
-            :key="user.id"
-            :value="user.id"
-            :selected="
-              taskData.users?.data.some((member) => member.id === user.id)
-            "
-          >
+          <option v-for="user in users" :key="user.id" :value="user.id">
             {{ user.name }}
           </option>
         </select>
@@ -94,7 +87,12 @@ export default {
       users.value = store.state.auth.users;
     };
 
-    onMounted(fetchUsers);
+    onMounted(() => {
+      fetchUsers();
+      taskData.value.user_ids = taskData.value.users.data.map(
+        (user) => user.id
+      );
+    });
 
     const save = () => {
       if (
