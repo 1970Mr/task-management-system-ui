@@ -29,7 +29,7 @@
 
 <script>
 import { ref, watch } from "vue";
-import Modal from "@/components/UI/Modal.vue";
+import Modal from "@/components/UI/BaseModal.vue";
 
 export default {
   components: {

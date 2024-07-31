@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import Header from "@/components/Layout/Header.vue";
+import Header from "@/components/Layout/AppHeader.vue";
 import TaskList from "@/components/Dashboard/TaskList.vue";
 
 export default {
