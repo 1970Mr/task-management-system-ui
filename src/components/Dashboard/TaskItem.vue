@@ -8,10 +8,18 @@
       <div class="text-sm text-gray-600">{{ task.description }}</div>
     </div>
     <div class="flex space-x-2">
-      <button @click="$emit('edit', task)" class="btn btn-secondary">
+      <button
+        @click="$emit('edit', task)"
+        class="btn btn-secondary"
+        v-if="isAdmin"
+      >
         Edit
       </button>
-      <button @click="$emit('delete', task.id)" class="btn btn-danger">
+      <button
+        @click="$emit('delete', task.id)"
+        class="btn btn-danger"
+        v-if="isAdmin"
+      >
         Delete
       </button>
     </div>
@@ -38,6 +46,9 @@ export default {
         default:
           return "bg-white";
       }
+    },
+    isAdmin() {
+      return localStorage.getItem("userRole") === "admin";
     },
   },
 };

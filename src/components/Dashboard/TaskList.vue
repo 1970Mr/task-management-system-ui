@@ -1,6 +1,8 @@
 <template>
   <div>
-    <button @click="openModal" class="btn btn-primary mb-4">Add Task</button>
+    <button @click="openModal" class="btn btn-primary mb-4" v-if="isAdmin">
+      Add Task
+    </button>
     <div v-if="tasks.length === 0">No tasks available.</div>
     <div v-else class="px-[10rem]">
       <TaskItem
@@ -38,6 +40,9 @@ export default {
   },
   computed: {
     ...mapState("tasks", ["tasks"]),
+    isAdmin() {
+      return localStorage.getItem("userRole") === "admin";
+    },
   },
   methods: {
     ...mapActions("tasks", [
