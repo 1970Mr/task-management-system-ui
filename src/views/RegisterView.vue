@@ -1,8 +1,11 @@
 <template>
   <div class="flex items-center justify-center h-screen bg-gray-100">
     <div class="w-full max-w-md">
-      <form @submit.prevent="register">
+      <form @submit.prevent="registerHandler">
         <h2 class="text-2xl font-bold mb-6 text-center">Register</h2>
+        <div class="mb-4">
+          <input v-model="name" type="text" placeholder="Name" class="input" />
+        </div>
         <div class="mb-4">
           <input
             v-model="email"
@@ -19,10 +22,20 @@
             class="input"
           />
         </div>
-        <button type="submit" class="btn btn-primary w-full">Register</button>
+        <div class="mb-4">
+          <input
+            v-model="passwordConfirmation"
+            type="password"
+            placeholder="Password Confirmation"
+            class="input"
+          />
+        </div>
+        <button type="submit" class="btn btn-primary w-full mb-3">
+          Register
+        </button>
         <router-link
           :to="{ name: 'login' }"
-          class="text-blue-500 hover:underline mt-3"
+          class="text-blue-500 hover:underline"
         >
           Already have an account? Login here
         </router-link>
@@ -37,15 +50,22 @@ import { mapActions } from "vuex";
 export default {
   data() {
     return {
+      name: "",
       email: "",
       password: "",
+      passwordConfirmation: "",
     };
   },
   methods: {
     ...mapActions("auth", ["register"]),
-    async register() {
+    async registerHandler() {
       try {
-        await this.register({ email: this.email, password: this.password });
+        await this.register({
+          name: this.name,
+          email: this.email,
+          password: this.password,
+          password_confirmation: this.passwordConfirmation,
+        });
         this.$router.push("/dashboard");
       } catch (error) {
         console.error(error);

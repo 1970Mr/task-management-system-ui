@@ -19,10 +19,10 @@
             class="input"
           />
         </div>
-        <button type="submit" class="btn btn-primary w-full">Login</button>
+        <button type="submit" class="btn btn-primary w-full mb-4">Login</button>
         <router-link
           :to="{ name: 'register' }"
-          class="text-blue-500 hover:underline mt-3"
+          class="text-blue-500 hover:underline"
         >
           Don't have an account? Register here
         </router-link>
