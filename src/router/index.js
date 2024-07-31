@@ -9,28 +9,28 @@ const routes = [
   {
     path: "/login",
     name: "login",
-    component: import("@/views/LoginView.vue")
+    component: import("@/views/LoginView.vue"),
   },
   {
     path: "/register",
     name: "register",
-    component: import("@/views/RegisterView.vue")
+    component: import("@/views/RegisterView.vue"),
   },
   {
     path: "/dashboard",
     name: "dashboard",
-    component: import("@/views/DashboardView.vue")
+    component: import("@/views/DashboardView.vue"),
   },
   {
     path: "/admin-tasks",
     name: "adminTasks",
-    component: import("@/views/AdminTasksView.vue")
+    component: import("@/views/AdminTasksView.vue"),
   },
   {
     path: "/:catchAll(.*)",
     name: "notFound",
-    component: import("@/views/NotFoundView.vue")
-  }
+    component: import("@/views/NotFoundView.vue"),
+  },
 ];
 
 const router = createRouter({
