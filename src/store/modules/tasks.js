@@ -10,7 +10,7 @@ export default {
       state.tasks = tasks;
     },
     addTask(state, task) {
-      state.tasks.push(task);
+      state.tasks.unshift(task);
     },
     updateTask(state, updatedTask) {
       const index = state.tasks.findIndex((task) => task.id === updatedTask.id);

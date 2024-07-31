@@ -34,17 +34,30 @@
           placeholder="Deadline"
           class="input mb-2"
         />
+        <select v-model="taskData.user_ids" multiple class="input mb-2">
+          <option
+            v-for="user in users"
+            :key="user.id"
+            :value="user.id"
+            :selected="
+              taskData.users?.data.some((member) => member.id === user.id)
+            "
+          >
+            {{ user.name }}
+          </option>
+        </select>
       </div>
     </template>
     <template #footer>
       <button @click="$emit('close')" class="btn btn-secondary">Cancel</button>
-      <button @click="save" class="btn btn-primary">Save</button>
+      <button @click="save" class="btn btn-primary ms-3">Save</button>
     </template>
   </Modal>
 </template>
 
 <script>
-import { ref, watch } from "vue";
+import { ref, watch, onMounted } from "vue";
+import { useStore } from "vuex";
 import Modal from "@/components/UI/BaseModal.vue";
 
 export default {
@@ -60,11 +73,14 @@ export default {
         status: "active",
         priority: "medium",
         deadline: "",
+        user_ids: [],
       }),
     },
   },
   setup(props, { emit }) {
+    const store = useStore();
     const taskData = ref({ ...props.task });
+    const users = ref([]);
 
     watch(
       () => props.task,
@@ -73,19 +89,27 @@ export default {
       }
     );
 
+    const fetchUsers = async () => {
+      await store.dispatch("auth/fetchUsers");
+      users.value = store.state.auth.users;
+    };
+
+    onMounted(fetchUsers);
+
     const save = () => {
       if (
         taskData.value.title &&
         taskData.value.description &&
         taskData.value.status &&
         taskData.value.priority &&
-        taskData.value.deadline
+        taskData.value.deadline &&
+        taskData.value.user_ids.length > 0
       ) {
         emit("save", taskData.value);
       }
     };
 
-    return { taskData, save };
+    return { taskData, users, save };
   },
 };
 </script>
