@@ -19,6 +19,5 @@
 }
 
 .active-link {
-    font-weight: bold;
-    text-decoration: underline;
+    @apply font-bold shadow shadow-blue-200 py-[.43rem] px-3 rounded-lg
 }

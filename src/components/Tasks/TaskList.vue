@@ -1,6 +1,10 @@
 <template>
   <div>
-    <button @click="openModal" class="btn btn-primary mb-4" v-if="isAdmin">
+    <button
+      @click="openModal"
+      class="btn btn-primary mb-4"
+      v-if="isAdmin && this.$route.name === 'adminTasks'"
+    >
       Add Task
     </button>
     <div v-if="!tasks || tasks?.length === 0">No tasks available.</div>

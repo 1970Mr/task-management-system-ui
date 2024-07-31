@@ -89,7 +89,7 @@ export default {
 
     onMounted(() => {
       fetchUsers();
-      taskData.value.user_ids = taskData.value.users.data.map(
+      taskData.value.user_ids = taskData.value.users?.data.map(
         (user) => user.id
       );
     });
