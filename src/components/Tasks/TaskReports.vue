@@ -22,10 +22,7 @@
           <span
             class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none"
           >
-            <iconify-icon
-              icon="mdi:chevron-down"
-              class="w-5 h-5 text-gray-400"
-            />
+            <Icon icon="mdi:chevron-down" class="w-5 h-5 text-gray-400" />
           </span>
         </ListboxButton>
         <Transition
@@ -33,15 +30,16 @@
           leave="transition ease-in duration-100"
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
+          class="space-y-3"
         >
           <ListboxOptions
-            class="absolute w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+            class="absolute w-[50rem] py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
           >
             <ListboxOption
               v-for="user in users"
               :key="user.id"
               :value="user"
-              class="cursor-default select-none relative py-2 pl-10 pr-4"
+              class="cursor-default select-none relative py-2 pl-10 pr-4 list-none"
               :class="{
                 'text-blue-900 bg-blue-100': selectedUsers.includes(user),
               }"
@@ -58,7 +56,7 @@
                 v-if="selectedUsers.includes(user)"
                 class="absolute inset-y-0 left-0 flex items-center pl-3 text-blue-600"
               >
-                <iconify-icon icon="mdi:check" class="w-5 h-5" />
+                <Icon icon="mdi:check" class="w-5 h-5" />
               </span>
             </ListboxOption>
           </ListboxOptions>
@@ -81,6 +79,7 @@ import {
 import { mapState, mapActions } from "vuex";
 import taskReportsService from "@/api/taskReports";
 import Swal from "sweetalert2";
+import { Icon } from "@iconify/vue";
 
 export default {
   components: {
@@ -88,7 +87,7 @@ export default {
     ListboxButton,
     ListboxOptions,
     ListboxOption,
-    "iconify-icon": window["IconifyIcon"],
+    Icon,
   },
   data() {
     return {
